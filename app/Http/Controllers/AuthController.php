@@ -27,7 +27,7 @@ class AuthController extends Controller
         $success['token'] = $authUser->createToken($this->faker->word())->plainTextToken;
         $success['name'] = $authUser->name;
 
-        return response()->json([$success,'message' => 'User signed in' ]);
+        return response()->json([$success,'message' => 'User signed in']);
     }
 
     public function signUp(SignUpRequest $request): JsonResponse
