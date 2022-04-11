@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RequisitionsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+Route::group(['middleware' => 'auth:sanctum'], function() {
+    Route::apiResource('requisitions', RequisitionsController::class)->only(['store','update']);
+    Route::get('/user', fn(Request $request) => $request->user());
 });
+
+Route::apiResource('requisitions', RequisitionsController::class)->only(['index','show','destroy']);
+Route::post('/signup', [AuthController::class, 'signUp'])->name('signUp');
+Route::post('/signin', [AuthController::class, 'signIn'])->name('signIn');
+Route::fallback(function (){abort(404, 'API resource not found');});
