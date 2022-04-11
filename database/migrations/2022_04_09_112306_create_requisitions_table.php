@@ -15,7 +15,12 @@ return new class extends Migration
     {
         Schema::create('requisitions', function (Blueprint $table) {
             $table->id();
+            $table->uuid()->unique()->index();
+            $table->string('name', 255)->index();
+            $table->text('description');
             $table->timestamps();
+
+            $table->fullText('description');
         });
     }
 
