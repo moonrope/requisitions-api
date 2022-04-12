@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Auth\SignInRequest;
 use App\Http\Requests\Auth\SignUpRequest;
 use App\Services\UserService;
+use Faker\Generator as Faker;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-use Faker\Generator as Faker;
 
 class AuthController extends Controller
 {

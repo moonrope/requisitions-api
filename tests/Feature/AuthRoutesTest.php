@@ -4,10 +4,13 @@ namespace Tests\Feature;
 
 use App\Models\Item;
 use App\Models\Requisition;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class AuthRoutesTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_check_auth_routes_requisition(){
 
         $requisition = Requisition::factory()->create();
