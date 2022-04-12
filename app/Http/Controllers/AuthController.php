@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\SignInRequest;
 use App\Http\Requests\Auth\SignUpRequest;
-use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Faker\Generator as Faker;
@@ -12,6 +12,7 @@ use Faker\Generator as Faker;
 class AuthController extends Controller
 {
     public function __construct(
+        private UserService $userService,
         private Auth $auth,
         private Faker $faker
     ){
@@ -32,7 +33,7 @@ class AuthController extends Controller
 
     public function signUp(SignUpRequest $request): JsonResponse
     {
-        $user = User::create($request->all());
+        $user = $this->userService->store($request->all());
         $success['token'] =  $user->createToken($this->faker->word())->plainTextToken;
         $success['name'] =  $user->name;
 
