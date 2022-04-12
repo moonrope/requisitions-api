@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\Item;
 use App\Models\Requisition;
 use App\Models\User;
-use Database\Factories\ItemFactory;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
