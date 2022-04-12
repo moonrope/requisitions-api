@@ -70,7 +70,7 @@ class RequisitionService
     }
 
     private function sendEmail(Requisition $requisition): void {
-        Mail::to('miguel@moonrope.com')
+        Mail::to('miguel@myawesomedomain.com')
             ->queue(new RequisitionMail($requisition));
     }
 }
