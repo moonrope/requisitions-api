@@ -2,15 +2,18 @@
 
 namespace App\Services;
 
+use App\Mail\RequisitionMail;
+use App\Models\Requisition;
 use App\Repositories\RequisitionRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class RequisitionService
 {
     public function __construct(
         private RequisitionRepository $requisitionRepository,
-        private ItemService $itemService
+        private ItemService $itemService,
     ){
     }
 
@@ -29,7 +32,9 @@ class RequisitionService
         $items = $values['items'] ?? null;
 
         if(!$items){
-            return $this->requisitionRepository->store($values);
+            $requisition = $this->requisitionRepository->store($values);
+            $this->sendEmail($requisition);
+            return $requisition;
         }
 
         $requisition = $this->requisitionRepository->store(
@@ -48,8 +53,9 @@ class RequisitionService
             );
 
         }
-
-        return $requisition->load('items');
+        $requisition = $requisition->load('items');
+        $this->sendEmail($requisition);
+        return $requisition;
     }
 
     public function update(int $id, array $values): Model
@@ -61,5 +67,10 @@ class RequisitionService
     public function destroy(int $id): int
     {
         return $this->requisitionRepository->delete($id);
+    }
+
+    private function sendEmail(Requisition $requisition): void {
+        Mail::to('miguel@moonrope.com')
+            ->queue(new RequisitionMail($requisition));
     }
 }
