@@ -13,10 +13,11 @@
 Some examples for create and show, overall is a CRUD, so it has all the expected endpoints, is important to take in consideration that
 ID's are hidden from to the outside, the API uses only UUID as unique identified, in the services and repository level only works with ids.
 ### Requisitions Create
+- Endpoint: `laravel.test/api/requisitions`
+- Method: `POST`
+- Body
 ``` JSON
-Endpoint: laravel.test/api/requisitions
-Method: post
-Body:: {
+{
     "name": "Requisition Test",
     "description": "Test description",
     "items": [
@@ -28,8 +29,10 @@ Body:: {
         }
     ]
 }
-
-response: {
+```
+Response
+``` JSON
+{
     "data": {
         "name": "Requisition Test",
         "description": "Test description",
@@ -53,14 +56,14 @@ response: {
       },
      "status": 201,
      "api_version": "v1"
-    }
+}
 ```
 ### Requisitions show
+- Endpoint: `laravel.test/api/requisitions/112925fe-d7cf-49b6-af1a-83af0111bf80`
+- Method: `GET`
 ``` JSON
-Endpoint: laravel.test/api/requisitions/112925fe-d7cf-49b6-af1a-83af0111bf80
-Method: GET
-response: {
-    data": {
+{    
+    "data": {
         "name": "Requisition Test",
         "description": "Test description",
         "reference": "112925fe-d7cf-49b6-af1a-83af0111bf80",
@@ -83,18 +86,22 @@ response: {
     },
     "status": 200,
     "api_version": "v1"
-    }
+}
 ```
 ### Items create
+- Endpoint: `laravel.test/api/items`
+- Method: `POST`
+- Body 
 ``` JSON
-Endpoint: laravel.test/api/items
-Method: post
-Body: {
+{
     "name": "Requisition Test",
     "requisition_uuid": "112925fe-d7cf-49b6-af1a-83af0111bf80"
 }
-response: {
-    data": {
+```
+Response:
+``` JSON
+{
+    "data": {
         "name": "Item Test",
         "reference": "a60768c6-deb5-4644-a663-91a46bd7a33a",
         "updated_at": "2022-04-12T15:27:59.000000Z",
@@ -109,14 +116,15 @@ response: {
     },
     "status": 201,
     "api_version": "v1"
-    }
+}
 ```
 ### Items show
+- Endpoint: `laravel.test/api/items/a60768c6-deb5-4644-a663-91a46bd7a33`
+- Method: `GET`
+- Response
 ``` JSON
-Endpoint: laravel.test/api/items/a60768c6-deb5-4644-a663-91a46bd7a33
-Method: GET
-response: {
-    data": {
+{
+    "data": {
         "name": "Item Test",
         "reference": "a60768c6-deb5-4644-a663-91a46bd7a33a",
         "updated_at": "2022-04-12T15:27:59.000000Z",
@@ -131,7 +139,7 @@ response: {
     },
     "status": 200,
     "api_version": "v1"
-    }
+}
 ```
 
 ## How to run tests
