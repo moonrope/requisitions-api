@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Requisitions;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreRequisitionRequest extends FormRequest
 {
@@ -15,12 +16,20 @@ class StoreRequisitionRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:3|max:255',
-            'description' => 'required|min:3|max:1000'
+            'description' => 'required|min:3|max:1000',
+            'items.*' => ['sometimes','array','min:1'],
+            'items.*.name' => [
+                Rule::when(
+                    $this->has('items'),
+                    ['required', 'string', 'min:2']
+                )
+            ],
+
         ];
     }
 
     public function getData(): array
     {
-        return $this->only(['name', 'description']);
+        return $this->only(['name', 'description', 'items']);
     }
 }

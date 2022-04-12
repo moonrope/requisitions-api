@@ -20,18 +20,22 @@ class ItemService
 
     public function show(int $itemId): Model
     {
-        return $this->itemRepository->getById($itemId);
+        return $this->itemRepository
+            ->getById($itemId)
+            ->load('requisition');
     }
 
     public function store(array $input): Model
     {
-        return $this->itemRepository->store($input);
+        return $this->itemRepository
+            ->store($input)
+            ->load('requisition');
     }
 
     public function update(int $itemId, array $values): Model
     {
         $this->itemRepository->update($itemId, $values);
-        return $this->itemRepository->getById($itemId);
+        return $this->itemRepository->getById($itemId)->load('requisition');
     }
 
     public function destroy(int $itemId): int
