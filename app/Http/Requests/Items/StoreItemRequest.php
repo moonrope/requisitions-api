@@ -23,7 +23,7 @@ class StoreItemRequest extends BaseItemRequest
     #[ArrayShape(['requisition_id' => "int", 'name' => "string"])] public function getData(): array
     {
         return [
-            'requisition_id' => (int)$this->get('requisitionId'),
+            'requisition_id' => $this->input('requisitionId'),
             'name' => $this->get('name')
         ];
     }
