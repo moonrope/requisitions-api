@@ -11,11 +11,11 @@ class UpdateRequisitionRequest extends BaseRequisitionRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'requisitionUuid' => 'required|exists:requisitions,uuid',
-            'name' => 'sometimes|string|max:255',
+            'requisitionUuid' => 'required|uuid|exists:requisitions,uuid',
+            'name' => 'sometimes|string|min:3|max:255',
             'description' => 'sometimes|min:3|max:1000'
         ];
     }

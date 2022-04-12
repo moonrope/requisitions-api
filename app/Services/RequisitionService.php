@@ -25,7 +25,7 @@ class RequisitionService
 
     public function store(array $values): Model
     {
-        return $this->requisitionRepository->create($values);
+        return $this->requisitionRepository->store($values);
     }
 
     public function update(int $id, array $values): Model
@@ -34,7 +34,7 @@ class RequisitionService
         return $this->getById($id);
     }
 
-    public function delete(int $id): int
+    public function destroy(int $id): int
     {
         return $this->requisitionRepository->delete($id);
     }

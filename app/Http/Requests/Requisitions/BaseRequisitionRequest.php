@@ -12,23 +12,30 @@ class BaseRequisitionRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             //
         ];
     }
 
-    public function prepareForValidation()
+    public function prepareForValidation(): void
     {
-        $this->merge(['requisitionUuid' => $this->route('requisition')]);
+        if ($this->route('requisition')) {
+            $this->merge(['requisitionUuid' => $this->route('requisition')]);
+        }
     }
 
-    public function passedValidation()
+    public function passedValidation(): void
     {
-        /** @var RequisitionRepository $requisitionRepository */
-        $requisitionRepository = app(RequisitionRepository::class);
-        $requisition = $requisitionRepository->getByUuid($this->get('requisitionUuid'));
-        $this->merge(['requisitionId' => $requisition->id]);
+        if ($this->has('requisitionUuid')) {
+
+            /** @var RequisitionRepository $requisitionRepository */
+            $requisitionRepository = app(RequisitionRepository::class);
+
+            $requisition = $requisitionRepository->getByUuid($this->get('requisitionUuid'));
+
+            $this->merge(['requisitionId' => $requisition->id]);
+        }
     }
 }

@@ -14,9 +14,6 @@ class UserService
 
     public function store(array $input): Model
     {
-        return $this->userRepository->create($input);
+        return $this->userRepository->store($input);
     }
-
-
-
 }

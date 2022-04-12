@@ -4,15 +4,11 @@ namespace App\Http\Requests\Requisitions;
 
 class ShowRequisitionRequest extends BaseRequisitionRequest
 {
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
+
+    public function rules(): array
     {
         return [
-            'requisitionUuid' => 'required|exists:requisitions,uuid'
+            'requisitionUuid' => 'required|uuid|exists:requisitions,uuid',
         ];
     }
 }

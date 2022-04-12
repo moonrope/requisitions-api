@@ -69,7 +69,7 @@ class RequisitionsController extends Controller
      */
     public function destroy(DestroyRequisitionRequest $request): JsonResponse
     {
-        if(!$this->requisitionService->delete($request->get('requisitionId'))){
+        if(!$this->requisitionService->destroy($request->get('requisitionId'))){
             return response()->json('Error: requisition not deleted');
         }
         return response()->json('Success: requisition deleted');

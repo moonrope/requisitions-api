@@ -31,7 +31,5 @@ class BaseItemRequest extends FormRequest
             $requisition = $requisitionRepository->getByUuid($this->get('requisition_uuid'));
             $this->merge(['requisitionId' => $requisition->id]);
         }
-
     }
-
 }

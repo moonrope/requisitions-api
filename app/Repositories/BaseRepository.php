@@ -29,7 +29,7 @@ class BaseRepository
         return $this->getQueryBuilder()->get();
     }
 
-    public function create(array $values): Model
+    public function store(array $values): Model
     {
         return $this->getQueryBuilder()->create($values);
     }
@@ -44,9 +44,9 @@ class BaseRepository
         return $this->getQueryBuilder()->where('id', $id)->first();
     }
 
-    public function getByUuid(string $uuid): Model
+    public function getByUuid(string $uuid, string $columnName = 'uuid'): Model
     {
-        return $this->getQueryBuilder()->where('uuid', $uuid)->first();
+        return $this->getQueryBuilder()->where($columnName, $uuid)->first();
     }
 
     public function delete(int $id): int
