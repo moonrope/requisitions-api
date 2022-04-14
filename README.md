@@ -6,7 +6,8 @@
 - composer install
 - cp .env.example .env
 - php artisan key:generate
-- cd requisitions-api && sail up
+- cd requisitions-api && sail up -d
+- sail php artisan queue:work
 ```
 
 ### API 
