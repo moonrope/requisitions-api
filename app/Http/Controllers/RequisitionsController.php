@@ -58,7 +58,7 @@ class RequisitionsController extends Controller
      */
     public function update(UpdateRequisitionRequest $request): Model
     {
-        return $this->requisitionService->update($request->get('requisitionId'), $request->getInputData());
+        return $this->requisitionService->update($request->input('requisitionId'), $request->getInputData());
     }
 
     /**
@@ -69,7 +69,7 @@ class RequisitionsController extends Controller
      */
     public function destroy(DestroyRequisitionRequest $request): JsonResponse
     {
-        if(!$this->requisitionService->destroy($request->get('requisitionId'))){
+        if(!$this->requisitionService->destroy($request->input('requisitionId'))){
             return response()->json('Error: requisition not deleted');
         }
         return response()->json('Success: requisition deleted');

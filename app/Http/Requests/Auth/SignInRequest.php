@@ -14,7 +14,17 @@ class SignInRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|exists:users,email'
+            'email' => 'required|email|exists:users,email',
+            'password'=> [
+                'required',
+                'string',
+// This will be hidden to avoid making the user password too complex
+//                Password::min(8)
+//                    ->mixedCase()
+//                    ->numbers()
+//                    ->symbols()
+//                    ->uncompromised(),
+            ]
         ];
     }
 }

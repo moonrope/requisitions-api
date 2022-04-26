@@ -51,7 +51,6 @@ class RequisitionService
                     'requisition_id' => $requisition->id
                 ]
             );
-
         }
         $requisition = $requisition->load('items');
         $this->sendEmail($requisition);
@@ -69,7 +68,7 @@ class RequisitionService
         return $this->requisitionRepository->delete($id);
     }
 
-    private function sendEmail(Requisition $requisition): void {
+    private function sendEmail(Requisition|Model $requisition): void {
         Mail::to('miguel@myawesomedomain.com')
             ->queue(new RequisitionMail($requisition));
     }

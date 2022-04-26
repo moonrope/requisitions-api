@@ -10,7 +10,6 @@ use Tests\TestCase;
 class AuthRoutesTest extends TestCase
 {
     use RefreshDatabase;
-
     public function test_check_auth_routes_requisition(){
 
         $requisition = Requisition::factory()->create();

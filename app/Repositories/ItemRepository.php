@@ -12,5 +12,4 @@ class ItemRepository extends BaseRepository
     {
         parent::__construct($model);
     }
-
 }

@@ -25,6 +25,8 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
 
 Route::apiResource('requisitions', RequisitionsController::class)->only(['index','show','destroy']);
 Route::apiResource('items', ItemsController::class)->only(['index','show','destroy']);
+//Login routes
 Route::post('/signup', [AuthController::class, 'signUp'])->name('signUp');
 Route::post('/signin', [AuthController::class, 'signIn'])->name('signIn');
+// Changes
 Route::fallback(static fn () => abort(404, 'API resource not found'));

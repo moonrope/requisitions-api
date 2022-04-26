@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\Item;
 use App\Models\Requisition;
 use App\Models\User;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\Sanctum;
@@ -16,9 +15,6 @@ use Throwable;
 class ItemTest extends TestCase
 {
     use RefreshDatabase;
-
-    private Authenticatable $user;
-
     /**
      * A basic feature test example.
      *
@@ -47,7 +43,7 @@ class ItemTest extends TestCase
 
     public function test_create_item()
     {
-        $this->user = Sanctum::actingAs(User::factory()->create());
+        Sanctum::actingAs(User::factory()->create());
         $requisition = Requisition::factory()->createOne();
         $item = Item::factory()->makeOne(['requisition_id' => $requisition->id]);
 
@@ -68,7 +64,7 @@ class ItemTest extends TestCase
 
     public function test_destroy_item()
     {
-        $this->user = Sanctum::actingAs(User::factory()->create());
+        Sanctum::actingAs(User::factory()->create());
         $item = Item::factory()->create()->getAttributes();
 
         $this->delete('/api/items/'. $item['reference'] .'/')
@@ -81,7 +77,7 @@ class ItemTest extends TestCase
      */
     public function test_destroy_non_existing_item()
     {
-        $this->user = Sanctum::actingAs(User::factory()->create());
+        Sanctum::actingAs(User::factory()->create());
 
         $fakeItemUuid = Str::uuid();
 
@@ -96,7 +92,7 @@ class ItemTest extends TestCase
 
     public function test_update_item()
     {
-        $this->user = Sanctum::actingAs(User::factory()->create());
+        Sanctum::actingAs(User::factory()->create());
         Item::factory()->create();
 
         $response = $this->get('/api/items')
@@ -123,7 +119,7 @@ class ItemTest extends TestCase
 
     public function test_update_non_existing_item()
     {
-        $this->user = Sanctum::actingAs(User::factory()->create());
+        Sanctum::actingAs(User::factory()->create());
         $fakeItemUuid = Str::uuid();
         $this->put('/api/items/'. $fakeItemUuid .'/')
             ->assertStatus(STATUS::HTTP_UNPROCESSABLE_ENTITY)

@@ -16,7 +16,16 @@ class SignUpRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required',
+            'password'=> [
+                'required',
+                'string',
+            // This will be hidden to avoid making the user password too complex
+//                Password::min(8)
+//                    ->mixedCase()
+//                    ->numbers()
+//                    ->symbols()
+//                    ->uncompromised(),
+            ],
             'confirm_password' => 'required|same:password',
         ];
     }

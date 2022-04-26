@@ -28,12 +28,10 @@ class BaseRequisitionRequest extends FormRequest
 
     public function passedValidation(): void
     {
-        if ($this->has('requisitionUuid')) {
-
+        if ($this->input('requisitionUuid')) {
             /** @var RequisitionRepository $requisitionRepository */
             $requisitionRepository = app(RequisitionRepository::class);
-
-            $requisition = $requisitionRepository->getByUuid($this->get('requisitionUuid'));
+            $requisition = $requisitionRepository->getByUuid($this->input('requisitionUuid'));
 
             $this->merge(['requisitionId' => $requisition->id]);
         }

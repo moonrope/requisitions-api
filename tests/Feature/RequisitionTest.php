@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\Requisition;
 use App\Models\User;
 use Database\Factories\RequisitionFactory;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\Sanctum;
@@ -16,9 +15,6 @@ use Throwable;
 class RequisitionTest extends TestCase
 {
     use RefreshDatabase;
-
-    private Authenticatable $user;
-
     /**
      * A basic feature test example.
      *
@@ -27,6 +23,8 @@ class RequisitionTest extends TestCase
     public function test_get_all_requisition()
     {
         $data = Requisition::factory()->count(15)->create();
+        $this->assertDatabaseCount('requisitions', 15);
+
         $firstRecord = $data->first();
         $this->get('/api/requisitions')
             ->assertJsonCount(15, 'data')
@@ -38,7 +36,7 @@ class RequisitionTest extends TestCase
 
     public function test_create_requisition()
     {
-        $this->user = Sanctum::actingAs(User::factory()->create());
+        Sanctum::actingAs(User::factory()->create());
         $requisition = RequisitionFactory::new()->makeOne()->getAttributes();
         $this->post('/api/requisitions', $requisition)
             ->assertStatus(STATUS::HTTP_CREATED)
@@ -48,16 +46,19 @@ class RequisitionTest extends TestCase
                     'description' => $requisition['description'],
                 ]
             );
+        $this->assertDatabaseCount('requisitions', 1);
     }
 
     public function test_destroy_requisition()
     {
-        $this->user = Sanctum::actingAs(User::factory()->create());
-        $requisition = RequisitionFactory::new()->create()->getAttributes();
+        Sanctum::actingAs(User::factory()->create());
+        $requisition = RequisitionFactory::new()->createOne();
 
-        $this->delete('/api/requisitions/'. $requisition['uuid'] .'/')
+        $this->delete('/api/requisitions/'. $requisition->uuid .'/')
             ->assertStatus(STATUS::HTTP_OK)
             ->assertSeeText('Success: requisition deleted');
+
+        $this->assertModelMissing($requisition);
     }
 
     /**
@@ -65,7 +66,7 @@ class RequisitionTest extends TestCase
      */
     public function test_destroy_non_existing_requisition()
     {
-        $this->user = Sanctum::actingAs(User::factory()->create());
+        Sanctum::actingAs(User::factory()->create());
 
         $fakeRequisitionUuid = Str::uuid();
 
@@ -80,8 +81,10 @@ class RequisitionTest extends TestCase
 
     public function test_update_requisition()
     {
-        $this->user = Sanctum::actingAs(User::factory()->create());
-        Requisition::factory()->create();
+        Sanctum::actingAs(User::factory()->create());
+        $requisition = Requisition::factory()->create();
+        $this->assertModelExists($requisition);
+
         $response = $this->get('/api/requisitions')
             ->assertStatus(STATUS::HTTP_OK)
             ->assertJsonCount(1, 'data');
@@ -109,7 +112,7 @@ class RequisitionTest extends TestCase
 
     public function test_update_non_existing_requisition()
     {
-        $this->user = Sanctum::actingAs(User::factory()->create());
+        Sanctum::actingAs(User::factory()->create());
         $fakeRequisitionUuid = Str::uuid();
         $this->put('/api/requisitions/'. $fakeRequisitionUuid .'/')
             ->assertStatus(STATUS::HTTP_UNPROCESSABLE_ENTITY)
