@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Models\Requisition;
-use App\Models\User;
 use Database\Factories\RequisitionFactory;
+use Domain\Requisitions\Models\Requisition;
+use Domain\Users\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\Sanctum;

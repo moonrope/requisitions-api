@@ -2,9 +2,9 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\ForceJsonResponse;
-use App\Http\Middleware\JsonResponseMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Src\App\Middleware\ForceJsonResponse;
+use Src\App\Middleware\JsonResponseMiddleware;
 
 class Kernel extends HttpKernel
 {

@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Models\Item;
-use App\Models\Requisition;
+use Domain\Items\Models\Item;
+use Domain\Requisitions\Models\Requisition;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

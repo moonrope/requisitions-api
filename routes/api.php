@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ItemsController;
-use App\Http\Controllers\RequisitionsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Src\App\Controllers\Auth\AuthController;
+use Src\App\Controllers\Items\ItemsController;
+use Src\App\Controllers\Requisitions\RequisitionsController;
 
 /*
 |--------------------------------------------------------------------------
