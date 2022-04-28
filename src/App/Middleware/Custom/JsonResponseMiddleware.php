@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\App\Middleware;
+namespace App\Middleware\Custom;
 
 use Closure;
 use Illuminate\Http\JsonResponse;

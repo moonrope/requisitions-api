@@ -2,7 +2,7 @@
 
 namespace Src\App\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Controllers\Controller;
 use Domain\Users\Services\UserService;
 use Faker\Generator as Faker;
 use Illuminate\Http\JsonResponse;

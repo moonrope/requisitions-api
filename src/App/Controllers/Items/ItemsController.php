@@ -2,7 +2,7 @@
 
 namespace Src\App\Controllers\Items;
 
-use App\Http\Controllers\Controller;
+use App\Controllers\Controller;
 use Domain\Items\Service\ItemService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;

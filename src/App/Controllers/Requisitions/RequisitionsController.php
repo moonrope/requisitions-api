@@ -2,7 +2,7 @@
 
 namespace Src\App\Controllers\Requisitions;
 
-use App\Http\Controllers\Controller;
+use App\Controllers\Controller;
 use Domain\Requisitions\Service\RequisitionService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
