@@ -96,7 +96,7 @@ Response
 - Body 
 ``` JSON
 {
-    "name": "Requisition Test",
+    "name": "Item Test",
     "requisition_uuid": "112925fe-d7cf-49b6-af1a-83af0111bf80"
 }
 ```
@@ -109,7 +109,7 @@ Response:
         "updated_at": "2022-04-12T15:27:59.000000Z",
         "created_at": "2022-04-12T15:27:59.000000Z",
         "requisition": {
-            "uuid": "0ad58dfc-3a60-4ef1-9307-9b5f14c4623a",
+            "uuid": "112925fe-d7cf-49b6-af1a-83af0111bf80",
             "name": "Requisition Test",
             "description": "Test description",
             "created_at": "2022-04-12T15:22:46.000000Z",
@@ -121,7 +121,7 @@ Response:
 }
 ```
 ### Items show
-- Endpoint: `laravel.test/api/items/a60768c6-deb5-4644-a663-91a46bd7a33`
+- Endpoint: `laravel.test/api/items/a60768c6-deb5-4644-a663-91a46bd7a33a`
 - Method: `GET`
 - Response
 ``` JSON
@@ -132,7 +132,7 @@ Response:
         "updated_at": "2022-04-12T15:27:59.000000Z",
         "created_at": "2022-04-12T15:27:59.000000Z",
         "requisition": {
-            "uuid": "0ad58dfc-3a60-4ef1-9307-9b5f14c4623a",
+            "uuid": "112925fe-d7cf-49b6-af1a-83af0111bf80",
             "name": "Requisition Test",
             "description": "Test description",
             "created_at": "2022-04-12T15:22:46.000000Z",
